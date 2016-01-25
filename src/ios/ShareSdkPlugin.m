@@ -6,7 +6,7 @@
 //
 //
 
-#import "ShareSDKPlugin.h"
+#import "ShareSdkPlugin.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <ShareSDK/ShareSDK.h>
@@ -14,9 +14,9 @@
 #import "Operation.h"
 #import <ShareSDKExtension/SSEThirdPartyLoginHelper.h>
 
-@implementation ShareSDKPlugin
+@implementation ShareSdkPlugin
 
-- (void)initializeShareSDK
+- (void)init:(CDVInvokedUrlCommand*)command
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ShareSDKParams" ofType:@"plist"];
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
