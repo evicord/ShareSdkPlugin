@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SDK_KEY</key>
+	<string></string>
+	<key>WeChat</key>
+	<dict>
+		<key>WECHAT_ID</key>
+		<string></string>
+		<key>WECHAT_SECRET</key>
+		<string></string>
+	</dict>
+	<key>SinaWeibo</key>
+	<dict/>
+</dict>
+</plist>
