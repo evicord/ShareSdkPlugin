@@ -20,6 +20,7 @@
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ShareSDKParams" ofType:@"plist"];
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    data=[data objectForKey:@"params"];
     NSString *shareSdk_appid=[data objectForKey:@"SDK_KEY"];
     NSDictionary *weChat_dict=[data objectForKey:@"WeChat"];
     NSString *weChat_appid=[weChat_dict objectForKey:@"WECHAT_ID"];;
