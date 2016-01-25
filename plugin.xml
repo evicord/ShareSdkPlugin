@@ -184,6 +184,7 @@
         <source-file src="src/ios/ShareSDK/libraries/extends/WeChatSDK/libWeChatSDK.a" framework="true" />
         
         <!--        framework-->
+        <framework src="src/ios/ShareSDK/libraries/JavaScriptCore.framework" custom="true"/>
         <framework src="src/ios/ShareSDK/libraries/MOBFoundation.framework" custom="true"/>
         <framework src="src/ios/ShareSDK/libraries/AdSupport.framework" custom="true"/>
         <framework src="src/ios/ShareSDK/libraries/ShareSDK.framework" custom="true"/>
