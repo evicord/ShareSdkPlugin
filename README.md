@@ -1,0 +1,2 @@
+# CordovaShareSDK
+# ShareSdkPlugin
