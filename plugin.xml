@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.tyrion.plugin.sharesdk" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>ShareSdkPlugin</name>
+	<preference name="SDK_KEY" />
+	<preference name="WECHAT_ID" />
+	<preference name="WECHAT_SECRET" />
+	<js-module name="ShareSdkPlugin" src="www/ShareSdkPlugin.js">
+		<clobbers target="cordova.plugins.ShareSdkPlugin" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="ShareSdkPlugin">
+				<param name="android-package" value="com.tyrion.plugin.sharesdk.ShareSdkPlugin" />
+			</feature>
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+			<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+			<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+			<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+			<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			<uses-permission android:name="android.permission.GET_TASKS"/>
+			<uses-permission android:name="android.permission.INTERNET"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+				android:name="com.mob.tools.MobUIShell"
+				android:theme="@android:style/Theme.Translucent.NoTitleBar"
+				android:configChanges="keyboardHidden|orientation|screenSize"
+				android:screenOrientation="portrait"
+				android:windowSoftInputMode="stateHidden|adjustResize" />
+
+			<activity     
+			    android:name="com.evicord.panart.wxapi.WXEntryActivity"
+			    android:theme="@android:style/Theme.Translucent.NoTitleBar"     
+			    android:configChanges="keyboardHidden|orientation|screenSize"     
+			    android:exported="true"     
+			    android:screenOrientation="portrait" />
+
+        </config-file>
+        
+        <source-file src="src/android/ShareSdkPlugin.java" target-dir="src/com/tyrion/plugin/sharesdk" />
+        <source-file src="src/android/LoginHelper.java" target-dir="src/com/tyrion/plugin/sharesdk" />
+        <source-file src="src/android/ShareSdkConst.java" target-dir="src/com/tyrion/plugin/sharesdk" />
+        <source-file src="src/android/ShareSdkImageUtils.java" target-dir="src/com/tyrion/plugin/sharesdk" />
+		<source-file src="src/android/src/cn/sharesdk/onekeyshare" target-dir="src/cn/sharesdk/onekeyshare" />
+		<source-file src="src/android/src/com/evicord/panart/wxapi" target-dir="src/com/evicord/panart/wxapi" />
+
+		<source-file src="src/android/assets/ShareSDK.xml" target-dir="assets" />
+
+		<source-file src="src/android/libs/MobCommons.jar" target-dir="libs" />
+		<source-file src="src/android/libs/MobTools.jar" target-dir="libs" />
+		<source-file src="src/android/libs/ShareSDK-Core-2.6.6.jar" target-dir="libs" />
+		<source-file src="src/android/libs/ShareSDK-SinaWeibo-2.6.6.jar" target-dir="libs" />
+		<source-file src="src/android/libs/ShareSDK-Wechat-2.6.6.jar" target-dir="libs" />
+		<source-file src="src/android/libs/ShareSDK-Wechat-Core-2.6.6.jar" target-dir="libs" />
+		<source-file src="src/android/libs/ShareSDK-Wechat-Moments-2.6.6.jar" target-dir="libs" />
+
+		<source-file src="src/android/res/drawable/ssdk_oks_classic_platform_corners_bg.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/ssdk_oks_skyblue_platform_list_item_selected.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/ssdk_oks_skyblue_platform_list_item.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/ssdk_oks_skyblue_platform_list_selector.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable-hdpi/ssdk_oks_ptr_ptr.png" target-dir="res/drawable-hdpi" />
+
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_auth_title_back.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_back_arr.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_logo.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_auth_follow_cb_chd.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_auth_follow_cb_unc.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_auth_title_back.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_blue_point.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_btn_back_nor.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_edittext_back.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_img_cancel.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_light_blue_point.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_logo_sinaweibo.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_logo_wechat.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_logo_wechatfavorite.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_logo_wechatmoments.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_pin.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_shake_to_share_back.xml" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_actionbar_back_btn.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_actionbar_ok_btn.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_editpage_bg.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_editpage_close.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_editpage_divider.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_editpage_image_bg.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_editpage_image_remove.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_sinaweibo_checked.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_sinaweibo.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_wechat_checked.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_wechat.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_wechatfavorite_checked.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_wechatfavorite.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_wechatmoments_checked.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_logo_wechatmoments.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_platform_checked_disabled.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_skyblue_platform_checked.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_title_back.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_title_shadow.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_oks_yaoyiyao.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ssdk_title_div.png" target-dir="res/drawable-xhdpi" />
+
+		<source-file src="src/android/res/layout/ssdk_oks_skyblue_editpage_at_layout.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ssdk_oks_skyblue_editpage_inc_image_layout.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ssdk_oks_skyblue_editpage.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ssdk_oks_skyblue_share_actionbar.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ssdk_oks_skyblue_share_platform_list_item.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ssdk_oks_skyblue_share_platform_list.xml" target-dir="res/layout" />
+
+		<source-file src="src/android/res/values/ssdk_instapaper_strings.xml" target-dir="res/values" />
+		<source-file src="src/android/res/values/ssdk_oks_strings.xml" target-dir="res/values" />
+		<source-file src="src/android/res/values/ssdk_strings.xml" target-dir="res/values" />
+
+		<source-file src="src/android/res/values-en/ssdk_oks_strings.xml" target-dir="res/values-en" />
+		<source-file src="src/android/res/values-en/ssdk_strings.xml" target-dir="res/values-en" />
+
+
+		<config-file target="assets/ShareSDK.xml" parent="/DevInfor">
+            <!-- <meta-data android:name="JPUSH_APPKEY" android:value="$API_KEY"/> -->
+            <ShareSDK 
+        		AppKey = "$SDK_KEY"/>
+
+		    <Wechat
+		        Id="4"
+		        SortId="4"
+		        AppId="$WECHAT_ID"
+		        AppSecret="$WECHAT_SECRET"
+		        BypassApproval="false"
+		        Enable="true" />
+
+		    <WechatMoments
+		        Id="5"
+		        SortId="5"
+		        AppId="$WECHAT_ID"
+		        AppSecret="$WECHAT_SECRET"
+		        BypassApproval="false"
+		        Enable="true" />
+		        
+			<WechatFavorite
+		        Id="6"
+		        SortId="6"
+		        AppId="$WECHAT_ID"
+		        AppSecret="$WECHAT_SECRET"
+		        Enable="true" />
+        </config-file>
+	</platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="ShareSdkPlugin">
+				<param name="ios-package" value="ShareSdkPlugin" />
+			</feature>
+		</config-file>
+		<source-file src="src/ios/ShareSdkPlugin.m" />
+	</platform>
+</plugin>
