@@ -128,6 +128,7 @@
 
 -(CDVPluginResult*)addUserInfo:(ShareSDKLoginType)_loginType uid:(NSString*)uid unionid:(NSString*)unionid nickname:(NSString*)nickname icon:(NSString*)icon accessToken:(NSString*)accessToken
 {
+    [Operation createDirectory];
     NSData* data=[NSData dataWithContentsOfURL:[NSURL URLWithString:icon]];
     NSString* tmpPath =[Operation tmpImagesDirectoryPath];
     NSDate *date=[NSDate date];
