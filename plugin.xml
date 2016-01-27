@@ -201,7 +201,6 @@
         <source-file src="src/ios/ShareSDK/libraries/libz.1.tbd" framework="true" />
         
         <!--config-file-->
-        
         <resource-file src="src/ios/ShareSDKParams.plist"/>
         
         <config-file target="*ShareSDKParams.plist" parent="params">
