@@ -20,11 +20,15 @@ public class ShareSdkPlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("wechatLogin")) {
+
+        if (action.equals("init")) {
             ShareSDK.initSDK(this.cordova.getActivity());
             ShareSDK.setConnTimeout(20000);
             ShareSDK.setReadTimeout(20000);
+            return true;
+        }
 
+        if (action.equals("wechatLogin")) {
             callback = callbackContext;
             String message = args.getString(0);
 
