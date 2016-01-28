@@ -16,6 +16,30 @@
 
 @implementation ShareSdkPlugin
 
+-(void)checkInStall:(CDVInvokedUrlCommand*)command
+{
+    NSArray *array=command.arguments[0];
+    NSInteger i;
+    NSMutableArray *rs_arry=[NSMutableArray arrayWithCapacity:array.count];
+    for (i=0; i<array.count; i++) {
+        NSNumber *isInStall=@(YES);
+        switch (i) {
+            case 0:
+                isInStall=![WXApi isWXAppSupportApi]?@(NO):isInStall;
+                break;
+                
+            case 1:
+                isInStall=![WeiboSDK isWeiboAppInstalled]?@(NO):isInStall;
+                break;
+            default:
+                break;
+        }
+        [rs_arry addObject:isInStall];
+    }
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:rs_arry];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)init:(CDVInvokedUrlCommand*)command
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ShareSDKParams" ofType:@"plist"];
@@ -60,6 +84,7 @@
                       break;
               }
           }];
+    
 }
 -(void)login:(CDVInvokedUrlCommand*)command
 {

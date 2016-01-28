@@ -18,4 +18,5 @@ typedef enum _shareSDKLoginType
 @interface ShareSdkPlugin : CDVPlugin
 -(void)init:(CDVInvokedUrlCommand*)command;
 -(void)login:(CDVInvokedUrlCommand*)command;
+-(void)checkInStall:(CDVInvokedUrlCommand*)command;
 @end
