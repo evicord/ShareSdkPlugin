@@ -78,11 +78,14 @@
 //                                                 authType:SSDKAuthTypeBoth];
 //                      break;
                   case SSDKPlatformTypeWechat:
+                      
                       [appInfo SSDKSetupWeChatByAppId:weChat_appid appSecret:weChat_secret];
                       break;
                   default:
                       break;
               }
+              CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+              [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
           }];
     
 }
