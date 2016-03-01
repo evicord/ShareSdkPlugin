@@ -215,7 +215,6 @@
     NSString* author=[data objectForKey:@"auther"];//作者
     NSString* work_url=[data objectForKey:@"serveUrl"];//专题url或作品url
     
-
     
     SSDKPlatformType shareType = share_type;
     
