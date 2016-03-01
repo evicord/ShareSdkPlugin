@@ -4,6 +4,8 @@
 	<preference name="SDK_KEY" />
 	<preference name="WECHAT_ID" />
 	<preference name="WECHAT_SECRET" />
+    <preference name="SINAWEIBO_ID" />
+    <preference name="SINAWEIBO_SECRET" />
 	<js-module name="ShareSdkPlugin" src="www/ShareSdkPlugin.js">
 		<clobbers target="cordova.plugins.ShareSdkPlugin" />
 	</js-module>
@@ -213,6 +215,13 @@
                 <string>$WECHAT_ID</string>
                 <key>WECHAT_SECRET</key>
                 <string>$WECHAT_SECRET</string>
+              </dict>
+              <key>sinaWeiBo</key>
+              <dict>
+                  <key>SINAWEIBO_ID</key>
+                  <string>$SINAWEIBO_ID</string>
+                  <key>SINAWEIBO_SECRET</key>
+                  <string>$SINAWEIBO_SECRET</string>
               </dict>
             </dict>
         </config-file>

@@ -46,9 +46,15 @@
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     data=[data objectForKey:@"params"];
     NSString *shareSdk_appid=[data objectForKey:@"SDK_KEY"];
+    
     NSDictionary *weChat_dict=[data objectForKey:@"WeChat"];
-    NSString *weChat_appid=[weChat_dict objectForKey:@"WECHAT_ID"];;
-    NSString *weChat_secret=[weChat_dict objectForKey:@"WECHAT_SECRET"];;
+    NSString *weChat_appid=[weChat_dict objectForKey:@"WECHAT_ID"];
+    NSString *weChat_secret=[weChat_dict objectForKey:@"WECHAT_SECRET"];
+    
+    NSDictionary *sinaWeiBo_dict=[data objectForKey:@"sinaWeiBo"];
+    NSString *sinaWeiBo_appid=[sinaWeiBo_dict objectForKey:@"SINAWEIBO_ID"];
+    NSString *sinaWeiBo_secret=[sinaWeiBo_dict objectForKey:@"SINAWEIBO_SECRET"];
+    
     [ShareSDK registerApp:shareSdk_appid
           activePlatforms:@[@(SSDKPlatformTypeSinaWeibo), @(SSDKPlatformTypeWechat)]
                  onImport:^(SSDKPlatformType platformType) {
@@ -70,13 +76,13 @@
               
               switch (platformType)
               {
-//                  case SSDKPlatformTypeSinaWeibo:
-//                      //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
-//                      [appInfo SSDKSetupSinaWeiboByAppKey:@"1083864391"
-//                                                appSecret:@"fb9d821655216784cae3f99c443b9068"
-//                                              redirectUri:@"https://api.weibo.com/oauth2/default.html"
-//                                                 authType:SSDKAuthTypeBoth];
-//                      break;
+                  case SSDKPlatformTypeSinaWeibo:
+                      //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
+                      [appInfo SSDKSetupSinaWeiboByAppKey:sinaWeiBo_appid
+                                                appSecret:sinaWeiBo_secret
+                                              redirectUri:@"https://api.weibo.com/oauth2/default.html"
+                                                 authType:SSDKAuthTypeBoth];
+                      break;
                   case SSDKPlatformTypeWechat:
                       [appInfo SSDKSetupWeChatByAppId:weChat_appid appSecret:weChat_secret];
                       break;
