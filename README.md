@@ -17,7 +17,8 @@
 
 方法一： 在线安装
 
-	cordova plugin add https://github.com/evicord/ShareSdkPlugin.git --variable SDK_KEY=<ShareSDK APP_ID> --variable WECHAT_ID=<微信APP_ID> --variable WECHAT_SECRET=<微信SECRET> --variable SINAWEIBO_ID=<新浪微博APP_ID> --variable SINAWEIBO_SECRET=<新浪微博SECRET>
+	cordova plugin add https://github.com/evicord/ShareSdkPlugin.git --variable SDK_KEY=<ShareSDK APP_ID> --variable WECHAT_ID=<微信APP_ID> --variable WECHAT_SECRET=<微信SECRET> --variable SINAWEIBO_ID=<新浪微博APP_ID> --variable SINAWEIBO_SECRET=<新浪微博SECRET> --variable SINAWEIBO_REDIRECTURI=<新浪微博授权URL>
+
 
 方法二：下载到本地再安装
 
@@ -25,4 +26,6 @@
 
 
     git clone https://github.com/evicord/ShareSdkPlugin.git
-    cordova plugin add $SHARE_SDK_PLUGIN_DIR --variable SDK_KEY=<ShareSDK APP_ID> --variable WECHAT_ID=<微信APP_ID> --variable WECHAT_SECRET=<微信SECRET> --variable SINAWEIBO_ID=<新浪微博APP_ID> --variable SINAWEIBO_SECRET=<新浪微博SECRET>
+
+    cordova plugin add $SHARE_SDK_PLUGIN_DIR --variable SDK_KEY=<ShareSDK APP_ID> --variable WECHAT_ID=<微信APP_ID> --variable WECHAT_SECRET=<微信SECRET> --variable SINAWEIBO_ID=<新浪微博APP_ID> --variable SINAWEIBO_SECRET=<新浪微博SECRET> --variable SINAWEIBO_REDIRECTURI=<新浪微博授权URL>
+

@@ -6,6 +6,7 @@
 	<preference name="WECHAT_SECRET" />
     <preference name="SINAWEIBO_ID" />
     <preference name="SINAWEIBO_SECRET" />
+    <preference name="SINAWEIBO_REDIRECTURI" />
 	<js-module name="ShareSdkPlugin" src="www/ShareSdkPlugin.js">
 		<clobbers target="cordova.plugins.ShareSdkPlugin" />
 	</js-module>
@@ -131,7 +132,7 @@
 		        SortId="1"
 		        AppKey="$SINAWEIBO_ID"
 		        AppSecret="$SINAWEIBO_SECRET"
-		        RedirectUrl="http://www.sharesdk.cn"
+		        RedirectUrl="$SINAWEIBO_REDIRECTURI"
 		        ShareByAppClient="true"
 		        Enable="true" />
 		    <Wechat
@@ -230,6 +231,8 @@
                   <string>$SINAWEIBO_ID</string>
                   <key>SINAWEIBO_SECRET</key>
                   <string>$SINAWEIBO_SECRET</string>
+                  <key>SINAWEIBO_REDIRECTURI</key>
+                  <string>$SINAWEIBO_REDIRECTURI</string>
               </dict>
             </dict>
         </config-file>
@@ -243,7 +246,7 @@
                     <string>Editor</string>
                     <key>CFBundleURLSchemes</key>
                     <array>
-                        <string>wb1083864391</string>
+                        <string>wb$SINAWEIBO_ID</string>
                     </array>
                 </dict>
                 
@@ -252,7 +255,7 @@
                     <string>Editor</string>
                     <key>CFBundleURLSchemes</key>
                     <array>
-                        <string>wxd8295ec80121b2ee</string>
+                        <string>$WECHAT_ID</string>
                     </array>
                 </dict>
                 

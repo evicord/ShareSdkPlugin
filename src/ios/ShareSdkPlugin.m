@@ -54,6 +54,10 @@
     NSDictionary *sinaWeiBo_dict=[data objectForKey:@"sinaWeiBo"];
     NSString *sinaWeiBo_appid=[sinaWeiBo_dict objectForKey:@"SINAWEIBO_ID"];
     NSString *sinaWeiBo_secret=[sinaWeiBo_dict objectForKey:@"SINAWEIBO_SECRET"];
+<<<<<<< HEAD
+=======
+    NSString *sinaWeiBo_redirecturi=[sinaWeiBo_dict objectForKey:@"SINAWEIBO_REDIRECTURI"];
+>>>>>>> 6e8c6faeed59255edd1ee371e8cd7caa81ecbb04
     
     [ShareSDK registerApp:shareSdk_appid
           activePlatforms:@[@(SSDKPlatformTypeSinaWeibo), @(SSDKPlatformTypeWechat)]
@@ -80,7 +84,11 @@
                       //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
                       [appInfo SSDKSetupSinaWeiboByAppKey:sinaWeiBo_appid
                                                 appSecret:sinaWeiBo_secret
+<<<<<<< HEAD
                                               redirectUri:@"https://api.weibo.com/oauth2/default.html"
+=======
+                                              redirectUri:sinaWeiBo_redirecturi
+>>>>>>> 6e8c6faeed59255edd1ee371e8cd7caa81ecbb04
                                                  authType:SSDKAuthTypeBoth];
                       break;
                   case SSDKPlatformTypeWechat:
