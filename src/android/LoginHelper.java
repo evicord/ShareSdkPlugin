@@ -1,6 +1,7 @@
 package com.tyrion.plugin.sharesdk;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,11 +98,13 @@ public class LoginHelper {
 
             @Override
             public void onError(Platform platform, int i, Throwable throwable) {
+//                Log.e(TAG, "onError");
                 if (loginListener!=null) loginListener.onFailed();
             }
 
             @Override
             public void onCancel(Platform platform, int i) {
+//                Log.e(TAG, "onCancel");
                 if (loginListener!=null) loginListener.onCancel();
             }
         });

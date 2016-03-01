@@ -7,3 +7,7 @@ exports.init = function(arg0, success, error) {
 exports.wechatLogin = function(arg0, success, error) {
     exec(success, error, "ShareSdkPlugin", "wechatLogin", [arg0]);
 };
+
+exports.share = function(shareType, data, success, error) {
+    exec(success, error, "ShareSdkPlugin", "share", [shareType, data]);
+};
