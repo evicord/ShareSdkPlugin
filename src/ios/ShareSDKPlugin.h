@@ -19,4 +19,5 @@ typedef enum _shareSDKLoginType
 -(void)init:(CDVInvokedUrlCommand*)command;
 -(void)login:(CDVInvokedUrlCommand*)command;
 -(void)checkInStall:(CDVInvokedUrlCommand*)command;
+- (void)share:(CDVInvokedUrlCommand*)command;
 @end
