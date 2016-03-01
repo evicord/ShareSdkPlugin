@@ -16,15 +16,45 @@
 
 @implementation ShareSdkPlugin
 
+-(void)checkInStall:(CDVInvokedUrlCommand*)command
+{
+    NSArray *array=command.arguments[0];
+    NSInteger i;
+    NSMutableArray *rs_arry=[NSMutableArray arrayWithCapacity:array.count];
+    for (i=0; i<array.count; i++) {
+        NSNumber *isInStall=@(YES);
+        switch (i) {
+            case 0:
+                isInStall=![WXApi isWXAppSupportApi]?@(NO):isInStall;
+                break;
+                
+            case 1:
+                isInStall=![WeiboSDK isWeiboAppInstalled]?@(NO):isInStall;
+                break;
+            default:
+                break;
+        }
+        [rs_arry addObject:isInStall];
+    }
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:rs_arry];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)init:(CDVInvokedUrlCommand*)command
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ShareSDKParams" ofType:@"plist"];
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     data=[data objectForKey:@"params"];
     NSString *shareSdk_appid=[data objectForKey:@"SDK_KEY"];
+    
     NSDictionary *weChat_dict=[data objectForKey:@"WeChat"];
-    NSString *weChat_appid=[weChat_dict objectForKey:@"WECHAT_ID"];;
-    NSString *weChat_secret=[weChat_dict objectForKey:@"WECHAT_SECRET"];;
+    NSString *weChat_appid=[weChat_dict objectForKey:@"WECHAT_ID"];
+    NSString *weChat_secret=[weChat_dict objectForKey:@"WECHAT_SECRET"];
+    
+    NSDictionary *sinaWeiBo_dict=[data objectForKey:@"sinaWeiBo"];
+    NSString *sinaWeiBo_appid=[sinaWeiBo_dict objectForKey:@"SINAWEIBO_ID"];
+    NSString *sinaWeiBo_secret=[sinaWeiBo_dict objectForKey:@"SINAWEIBO_SECRET"];
+    
     [ShareSDK registerApp:shareSdk_appid
           activePlatforms:@[@(SSDKPlatformTypeSinaWeibo), @(SSDKPlatformTypeWechat)]
                  onImport:^(SSDKPlatformType platformType) {
@@ -46,13 +76,13 @@
               
               switch (platformType)
               {
-//                  case SSDKPlatformTypeSinaWeibo:
-//                      //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
-//                      [appInfo SSDKSetupSinaWeiboByAppKey:@"1083864391"
-//                                                appSecret:@"fb9d821655216784cae3f99c443b9068"
-//                                              redirectUri:@"https://api.weibo.com/oauth2/default.html"
-//                                                 authType:SSDKAuthTypeBoth];
-//                      break;
+                  case SSDKPlatformTypeSinaWeibo:
+                      //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
+                      [appInfo SSDKSetupSinaWeiboByAppKey:sinaWeiBo_appid
+                                                appSecret:sinaWeiBo_secret
+                                              redirectUri:@"https://api.weibo.com/oauth2/default.html"
+                                                 authType:SSDKAuthTypeBoth];
+                      break;
                   case SSDKPlatformTypeWechat:
                       [appInfo SSDKSetupWeChatByAppId:weChat_appid appSecret:weChat_secret];
                       break;
@@ -60,6 +90,7 @@
                       break;
               }
           }];
+    
 }
 -(void)login:(CDVInvokedUrlCommand*)command
 {
@@ -149,5 +180,113 @@
     return pluginResult;
 }
 
+- (void)share:(CDVInvokedUrlCommand*)command
+{
+    NSNumber *number=command.arguments[0];
+    NSDictionary *work_data=command.arguments[1];
+    /* work_data
+    作品ID
+    作品类型
+    专题名称或作品名称
+    专题图片url或作品图url
+    作者
+    专题url或作品url
+    */
+    SSDKPlatformType type=SSDKPlatformTypeUnknown;
+    switch ([number integerValue]) {
+        case 0:
+            type=SSDKPlatformSubTypeWechatTimeline;
+            //微信朋友圈 SSDKPlatformSubTypeWechatTimeline
+            break;
+        case 1:
+            type=SSDKPlatformSubTypeWechatSession;
+            //微信好友 SSDKPlatformSubTypeWechatSession
+            break;
+        case 2:
+            type=SSDKPlatformTypeSinaWeibo;
+            //新浪微博 SSDKPlatformTypeSinaWeibo
+            break;
+    }
+    if(type!=SSDKPlatformTypeUnknown)
+    {
+        [self shareType:type data:work_data callbackId:command.callbackId];
+    }
+}
+
+-(void)shareType:(SSDKPlatformType)share_type data:(NSDictionary*)data callbackId:(NSString*)callbackId
+{
+    
+    NSString* title=[data objectForKey:@"title"];//专题名称或作品名称
+    NSString* imageUrl=[data objectForKey:@"viewUrl"];//专题图片url或作品图url
+    NSString* author=[data objectForKey:@"auther"];//作者
+    NSString* work_url=[data objectForKey:@"serveUrl"];//专题url或作品url
+    
+    
+    SSDKPlatformType shareType = share_type;
+    
+    NSString* content=nil;
+    if (shareType == SSDKPlatformTypeSinaWeibo) {
+//        NSString* downloadUrl = @"https://www.9panart.com/0/install";
+        content = [NSString stringWithFormat:@"【%@】作者：%@。(分享自@泛艺术)",title,author];
+        
+    }else if(shareType == SSDKPlatformSubTypeWechatTimeline) {
+        
+        imageUrl=imageUrl?[NSString stringWithFormat:@"%@@100w.jpg", imageUrl]:imageUrl;// weinxin 小图
+        content=nil;
+        
+    }else if(shareType == SSDKPlatformSubTypeWechatSession)
+    {
+        imageUrl=imageUrl?[NSString stringWithFormat:@"%@@100w.jpg", imageUrl]:imageUrl;// weinxin 小图
+        content=[NSString stringWithString:title];
+        title=nil;
+    }
+    
+    
+    //创建分享参数
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    
+    [shareParams SSDKSetupShareParamsByText:content
+                                     images:imageUrl
+                                        url:[NSURL URLWithString:work_url]
+                                      title:title
+                                       type:SSDKContentTypeAuto];
+    
+    [shareParams SSDKEnableUseClientShare];
+    
+    //进行分享
+    [ShareSDK share:shareType
+         parameters:shareParams
+     onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+         
+         switch (state) {
+             case SSDKResponseStateSuccess:
+             {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+                 });
+                 break;
+             }
+             case SSDKResponseStateFail:
+             {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     NSString *error_str=@"分享失败";
+                     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error_str];
+                     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+                 });
+                 break;
+             }
+             case SSDKResponseStateCancel:
+             {
+                 NSLog(@"发布取消 type: %lu",(unsigned long)shareType);
+                 break;
+             }
+             default:
+                 break;
+         }
+         
+     }];
+    
+}
 
 @end

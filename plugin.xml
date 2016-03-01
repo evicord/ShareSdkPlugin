@@ -4,6 +4,8 @@
 	<preference name="SDK_KEY" />
 	<preference name="WECHAT_ID" />
 	<preference name="WECHAT_SECRET" />
+    <preference name="SINAWEIBO_ID" />
+    <preference name="SINAWEIBO_SECRET" />
 	<js-module name="ShareSdkPlugin" src="www/ShareSdkPlugin.js">
 		<clobbers target="cordova.plugins.ShareSdkPlugin" />
 	</js-module>
@@ -124,6 +126,14 @@
             <ShareSDK 
         		AppKey = "$SDK_KEY"/>
 
+			<SinaWeibo
+		        Id="1"
+		        SortId="1"
+		        AppKey="$SINAWEIBO_ID"
+		        AppSecret="$SINAWEIBO_SECRET"
+		        RedirectUrl="http://www.sharesdk.cn"
+		        ShareByAppClient="true"
+		        Enable="true" />
 		    <Wechat
 		        Id="4"
 		        SortId="4"
@@ -201,7 +211,6 @@
         <source-file src="src/ios/ShareSDK/libraries/libz.1.tbd" framework="true" />
         
         <!--config-file-->
-        
         <resource-file src="src/ios/ShareSDKParams.plist"/>
         
         <config-file target="*ShareSDKParams.plist" parent="params">
@@ -214,6 +223,13 @@
                 <string>$WECHAT_ID</string>
                 <key>WECHAT_SECRET</key>
                 <string>$WECHAT_SECRET</string>
+              </dict>
+              <key>sinaWeiBo</key>
+              <dict>
+                  <key>SINAWEIBO_ID</key>
+                  <string>$SINAWEIBO_ID</string>
+                  <key>SINAWEIBO_SECRET</key>
+                  <string>$SINAWEIBO_SECRET</string>
               </dict>
             </dict>
         </config-file>

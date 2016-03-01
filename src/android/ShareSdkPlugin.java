@@ -103,14 +103,21 @@ public class ShareSdkPlugin extends CordovaPlugin implements PlatformActionListe
                     break;
                 }
                 case ShareType.weibo: {
-                    OnekeyShare oks = new OnekeyShare();
-                    oks.setPlatform(SinaWeibo.NAME);
-                    oks.setTitle("title");
-                    oks.setText(data.getString("title"));
-                    oks.setImageUrl(data.getString("viewUrl"));
-                    oks.setUrl(data.getString("serveUrl"));
-                    oks.setCallback(this);
-                    oks.show(this.cordova.getActivity());
+//                    OnekeyShare oks = new OnekeyShare();
+//                    oks.setPlatform(SinaWeibo.NAME);
+//                    oks.setTitle("title");
+//                    oks.setText(data.getString("title"));
+//                    oks.setImageUrl(data.getString("viewUrl"));
+//                    oks.setUrl(data.getString("serveUrl"));
+//                    oks.setCallback(this);
+//                    oks.show(this.cordova.getActivity());
+
+                    ShareParams sp = new ShareParams();
+                    sp.setText(data.getString("title"));
+                    sp.setImageUrl(data.getString("viewUrl"));
+                    Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+                    weibo.setPlatformActionListener(this); // 设置分享事件回调
+                    weibo.share(sp);
                     break;
                 }
 
@@ -128,6 +135,7 @@ public class ShareSdkPlugin extends CordovaPlugin implements PlatformActionListe
 
     @Override
     public void onError(Platform platform, int i, Throwable throwable) {
+        throwable.printStackTrace();
         PluginResult result = new PluginResult(PluginResult.Status.ERROR, platform.getName());
         callback.sendPluginResult(result);
     }
