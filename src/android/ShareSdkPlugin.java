@@ -61,14 +61,14 @@ public class ShareSdkPlugin extends CordovaPlugin implements PlatformActionListe
                 @Override
                 public void onFailed() {
 //                    Log.e("onFailed", "onFailed");
-                    PluginResult result = new PluginResult(PluginResult.Status.ERROR, "failed");
+                    PluginResult result = new PluginResult(PluginResult.Status.ERROR, "请安装微信APP");
                     callback.sendPluginResult(result);
                 }
 
                 @Override
                 public void onCancel() {
 //                    Log.e("onCancel", "onCancel");
-                    PluginResult result = new PluginResult(PluginResult.Status.ERROR, "cancel");
+                    PluginResult result = new PluginResult(PluginResult.Status.ERROR, "微信登录取消");
                     callback.sendPluginResult(result);
                 }
             });

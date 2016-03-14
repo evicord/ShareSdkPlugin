@@ -48,7 +48,7 @@
         <source-file src="src/android/LoginHelper.java" target-dir="src/com/tyrion/plugin/sharesdk" />
         <source-file src="src/android/ShareSdkConst.java" target-dir="src/com/tyrion/plugin/sharesdk" />
         <source-file src="src/android/ShareSdkImageUtils.java" target-dir="src/com/tyrion/plugin/sharesdk" />
-        <source-file src="src/android/WXEntryActivity.java" target-dir="src/com/tyrion/plugin/sharesdk" />
+        <source-file src="src/android/WXEntryActivity.java" target-dir="src/com/evicord/panart/wxapi" />
 		<source-file src="src/android/src/cn/sharesdk/onekeyshare" target-dir="src/cn/sharesdk/onekeyshare" />
 		<source-file src="src/android/src/com/evicord/panart/wxapi" target-dir="src/com/evicord/panart/wxapi" />
 
